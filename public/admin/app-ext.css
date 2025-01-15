@@ -1,0 +1,40 @@
+.btn-progress {
+    box-shadow: none;
+    color: transparent !important;
+    pointer-events: none;
+    background-color: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+    opacity: var(--bs-btn-disabled-opacity);
+    position: relative;
+}
+.btn-progress:after {
+    content: "";
+    --bs-spinner-width: 1rem;
+    --bs-spinner-height: 1rem;
+    --bs-spinner-border-width: .2em;
+    --bs-spinner-animation-speed: .75s;
+    --bs-spinner-animation-name: spinner-border;
+    border: var(--bs-spinner-border-width) solid currentcolor;
+    border-right-color: transparent;
+
+    display: inline-block;
+    width: var(--bs-spinner-width);
+    height: var(--bs-spinner-height);
+    vertical-align: var(--bs-spinner-vertical-align);
+    border-radius: 50%;
+    animation: var(--bs-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+    color: white;
+    left: calc(50% - .5em);
+    position: absolute;
+    top: calc(50% - .5em);
+}
+
+.navbar-fixed .navbar-top {
+    background-color: #e2eeff !important;
+}
+
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

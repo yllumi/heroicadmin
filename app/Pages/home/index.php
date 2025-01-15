@@ -26,6 +26,7 @@
             <div class="card-body">
                 <h1>Welcome to HeroicAdmin!</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti tenetur expedita perferendis facere ab. Molestias, officia! Laboriosam amet hic recusandae cupiditate dolores nulla, eveniet saepe, corrupti debitis quibusdam velit tempora!</p>
+                <a href="#" class="btn btn-primary btn-progress">Processing...</a>
             </div>
         </div>
     </section>

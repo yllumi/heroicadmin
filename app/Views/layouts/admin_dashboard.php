@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" crossorigin href="/admin/compiled/css/app.css">
     <link rel="stylesheet" crossorigin href="/admin/compiled/css/app-dark.css">
+    <link rel="stylesheet" crossorigin href="/admin/app-ext.css">
 </head>
 
 <body>
@@ -20,22 +21,14 @@
         <?= $this->include('partials/admin_sidebar') ?>
 
         <!-- Content Section -->
-        <div id="main">
-            <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
-            </header>
+        <div id="main" class="layout-navbar navbar-fixed position-relative">
+            <?= $this->include('partials/admin_header') ?>
 
-            <?= $this->renderSection('main') ?>
+            <div id="main-content">
+                <?= $this->renderSection('main') ?>
+            </div>
 
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2024 &copy; HeroicAdmin</p>
-                    </div>
-                </div>
-            </footer>
+            <?= $this->include('partials/admin_footer') ?>
         </div>
 
     </div>
