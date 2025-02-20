@@ -11,23 +11,14 @@ class PageController extends BaseController
 	public function getSettings($pesantrenID = null)
 	{
 		// Get database pesantren
-        $Tarbiyya = new \App\Libraries\Tarbiyya();
+        $Heroic = new \App\Libraries\Heroic();
         $db = \Config\Database::connect();
 
-		$settingQuery = $db->table('mein_options')
-							->whereIn('option_group', ['site','masagi'])
-							->get()
-							->getResultArray();
-		
-		if($settingQuery)
-		{
-			$settingQuery = array_combine(array_column($settingQuery, 'option_name'), array_column($settingQuery, 'option_value'));
-			unset($settingQuery['recaptcha_secret_key']);
-		}
+		$settingQuery = config('App');
 
-		$userToken = $Tarbiyya->getUserToken();
+		$userToken = $Heroic->getUserToken();
 		if($userToken) {
-			$userQuery = $db->table('mein_users')
+			$userQuery = $db->table('users')
 							->where('id', $userToken->user_id)
 							->get()
 							->getRowArray();

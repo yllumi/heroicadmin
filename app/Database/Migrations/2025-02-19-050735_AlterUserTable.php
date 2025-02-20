@@ -4,21 +4,75 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AlterUserTable extends Migration
+class AddUserFields extends Migration
 {
     public function up()
     {
-        $this->db->query("ALTER TABLE `users`
-        ADD `name` varchar(255) COLLATE 'utf8mb4_general_ci' NULL AFTER `id`,
-        ADD `phone` varchar(15) COLLATE 'utf8mb4_general_ci' NULL AFTER `name`,
-        ADD `avatar` varchar(255) COLLATE 'utf8mb4_general_ci' NULL AFTER `phone`;");
+        $fields = [
+            'name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+                'after' => 'id' // Hanya berlaku di MySQL
+            ],
+            'phone' => [
+                'type' => 'VARCHAR',
+                'constraint' => 15,
+                'null' => true,
+                'after' => 'name'
+            ],
+            'email' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+                'after' => 'phone'
+            ],
+            'avatar' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+                'after' => 'email'
+            ],
+            'password' => [
+                'type' => 'TEXT', // TinyText tidak ada di SQLite, jadi pakai TEXT
+                'null' => true,
+                'after' => 'avatar'
+            ],
+            'token' => [
+                'type' => 'VARCHAR',
+                'constraint' => 150,
+                'null' => true,
+                'after' => 'password'
+            ],
+            'otp' => [
+                'type' => 'VARCHAR',
+                'constraint' => 6,
+                'null' => true,
+                'after' => 'token'
+            ],
+            'otp_email' => [
+                'type' => 'VARCHAR',
+                'constraint' => 6,
+                'null' => true,
+                'after' => 'otp'
+            ],
+            'otp_phone' => [
+                'type' => 'VARCHAR',
+                'constraint' => 6,
+                'null' => true,
+                'after' => 'otp_email'
+            ],
+        ];
+
+        // Tambahkan kolom ke tabel users
+        $this->forge->addColumn('users', $fields);
     }
 
     public function down()
     {
-        $this->db->query("ALTER TABLE `users`
-        DROP `name`,
-        DROP `phone`,
-        DROP `avatar`;");
+        // Hapus kolom saat rollback
+        $this->forge->dropColumn('users', [
+            'name', 'phone', 'email', 'avatar', 'password', 'token', 'otp', 'otp_email', 'otp_phone'
+        ]);
     }
 }
