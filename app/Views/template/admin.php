@@ -12,12 +12,25 @@
     <link rel="stylesheet" crossorigin href="/admin/compiled/css/app.css">
     <link rel="stylesheet" crossorigin href="/admin/compiled/css/app-dark.css">
     <link rel="stylesheet" crossorigin href="/admin/app-ext.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.9/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css">
+    <!-- Datepicker -->
+    <link rel="stylesheet" id="theme-style" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.9/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+
 </head>
 
 <body>
     <script src="/admin/static/js/initTheme.js"></script>
     <div id="app">
-        
+
         <?= $this->include('partials/admin_sidebar') ?>
 
         <!-- Content Section -->
@@ -36,6 +49,165 @@
     <script src="/admin/static/js/components/dark.js"></script>
     <script src="/admin/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/admin/compiled/js/app.js"></script>
+
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script> -->
+
+    <!-- https://fengyuanchen.github.io/datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" type="text/javascript"></script>
+
+    <!-- Ace Code Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.min.js" integrity="sha512-jB1NOQkR0yLnWmEZQTUW4REqirbskxoYNltZE+8KzXqs9gHG5mrxLR5w3TwUn6AylXkhZZWTPP894xcX/X8Kbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/mode-html.min.js" integrity="sha512-vSQkVhmiIt31RHmh8b65o0ap3yoL08VJ6MeuiCGo+92JDdSSWAEWoWELEf3WBk4e2tz/0CvnTe87Y2rFrNjcbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.10.1/mode-yaml.min.js" integrity="sha512-WcvQVyf7ECu3mkQRpaJJ2l05xJAIlFM1bscCbwduQBztxzoGUWqkAawsMdLr6tkD9ke4V6soIh6aufeAuW1ruw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/mode-json.min.js" integrity="sha512-dux75XSGmyoN14vXQ2uJ7dvx/uOjmTZfVPG/MBk27VT/k2dug8X1TSgye8RhHv3fhhZLTnWMwi8doXXbM4cvUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/mode-css.min.js" integrity="sha512-y7tJeEggFZ4vA7ILQ9woUlZKyrTDdJfzCX6xUztUU6gGMy6k1DJfE/94YxZbLu5do99cTUDW6l+xqkekx0FFlg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- ColorPicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinyColorPicker/1.1.1/jqColorPicker.min.js" integrity="sha512-jQ+T1MmwqyWSgkn1MtW6OxXc6wySH9YnmC8rPlEAn0CLgWH4gY1Di/6r42BOqO9zSbLQxZ/47Xs/6qc2rIZmXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- DatePicker -->
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"></script>
+
+    <script>
+        var myckeditor = [];
+        var inputChanged;
+
+        function initEntryScript() {
+            // Prevent close form before save
+            inputChanged = false;
+            $('.entryForm').find('input,select,textarea').on('keyup change', function() {
+                inputChanged = true;
+            })
+            $('.entryForm').on('submit', function() {
+                inputChanged = false;
+            })
+            window.addEventListener('beforeunload', function(e) {
+                if (inputChanged) {
+                    e.preventDefault();
+                    e.returnValue = '';
+                }
+            });
+
+            $('.color').colorPicker({
+                opacity: true
+            });
+
+            $(".slugify input.title").keyup(function() {
+                var title = $(this).val();
+                $("input.slug").val(convertToSlug(title));
+            });
+
+            var to_reffer = $('.slugify').data('referer');
+
+            $("#" + to_reffer).keyup(function() {
+                var content = $(this).val();
+                $('.slugify').val(convertToSlug(content));
+            });
+
+            $('.btn-connect-relation').click(function() {
+                var id = $('#id').val();
+                var entry = $('#entry').val();
+                var relation = $('#relation').val();
+                var choosen = $('#choice input:checked').map(function() {
+                    return $(this).val();
+                });
+
+                $.post(base_url + 'admin/entry/entry/update_relation', {
+                        id: id,
+                        entry: entry,
+                        relation: relation,
+                        choosen: choosen.get()
+                    })
+                    .done(function(data) {
+                        if (data = 'done') {
+                            location.reload();
+                        }
+                    });
+            });
+
+            // Ace Editor
+            let aceEntryEditors = [];
+            let codeEditorElms = $('.code_editor');
+            codeEditorElms.each(function(i, obj) {
+                let editorID = $(obj).attr('id');
+                let editorInputID = $(obj).data('input-id');
+                aceEntryEditors[editorID] = ace.edit(editorID);
+                aceEntryEditors[editorID].session.setMode("ace/mode/" + $(obj).data('mode'));
+                document.getElementById(editorID).style.fontSize = '16px';
+                aceEntryEditors[editorID].session.setUseWrapMode(true);
+                aceEntryEditors[editorID].session.setOption('tabSize', 2);
+                aceEntryEditors[editorID].session.on('change', function(delta) {
+                    $('#' + editorInputID).val(aceEntryEditors[editorID].getValue());
+                });
+            })
+
+            $('.ajaxupload').on('change', function(e) {
+                console.log(e.target.files);
+                $.ajax({
+                    url: "https://madrasahdigital.id/entry/upload",
+                    type: "POST",
+                    data: e.target.files,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
+                        console.log(data)
+                    }
+                });
+            })
+        }
+        $(function(){
+            initEntryScript();
+
+        })
+
+        /* HELPER FUNCTIONS */
+        //////////////////////
+
+        function convertToSlug(Text) {
+            return Text
+                .toLowerCase()
+                .replace(/[^\w ]+/g, '')
+                .replace(/ +/g, '-');
+        }
+
+        function inArray(needle, haystack) {
+            var length = haystack.length;
+            for (var i = 0; i < length; i++) {
+                if (typeof haystack[i] == 'object') {
+                    if (arrayCompare(haystack[i], needle)) return true;
+                } else {
+                    if (haystack[i] == needle) return true;
+                }
+            }
+            return false;
+        }
+
+        // CKEditor insert image to editor
+        function insertImages(editor, url) {
+            const imageCommand = editor.commands.get('insertImage');
+            if (!imageCommand.isEnabled) {
+                const notification = editor.plugins.get('Notification');
+                const t = editor.locale.t;
+                notification.showWarning(t('Could not insert image at the current position.'), {
+                    title: t('Inserting image failed'),
+                    namespace: 'rfm'
+                });
+                return;
+            }
+            editor.execute('insertImage', {
+                source: url
+            });
+        }
+
+        // Add rfm callback to place image to ckeditor
+        function responsive_filemanager_callback(field_id) {
+            let splitID = field_id.split('__');
+            if (splitID[1] == 'entry') {
+                insertImages(myckeditor[splitID[0]], $('#' + field_id).val());
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -9,13 +9,14 @@ class MobileBaseController extends BaseController
 {
 	public $data = [];
 
+	protected $pageTitle = 'Page Title';
+
 	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-		$this->data['title'] = 'HeroicAdmin';
-		$this->data['page_title'] = 'Beranda';
+		$this->data['page_title'] = $this->pageTitle;
 		$this->data['themeURL'] = base_url('mobilekit') .'/'; 
         $this->data['themePath'] = 'mobilekit/'; 
         $this->data['version'] = "1.0.0";

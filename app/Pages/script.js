@@ -67,6 +67,9 @@ document.addEventListener('alpine:init', () => {
 
 })
 
+// Deklarasi variable untuk menyimpan cache data page
+window.pageCache = {}; 
+
 //****************************************************************** */
 // Animated header style on scroll
 //****************************************************************** */
