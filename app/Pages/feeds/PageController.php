@@ -23,7 +23,7 @@ class PageController extends MobileBaseController
         // Retrieve extension attributes
 		$page = (int)($this->request->getGet('page') ?? 1);
 		$status = $this->request->getGet('status') ?? 'publish';
-		$perpage = (int)($this->request->getGet('perpage') ?? 2);
+		$perpage = (int)($this->request->getGet('perpage') ?? 15);
 		$offset = ($page-1) * $perpage;
 
         // Get post data
@@ -57,10 +57,7 @@ class PageController extends MobileBaseController
 		return $this->respond([
 			'response_code'    => 200,
 			'response_message' => 'success',
-            
-            // Provide page data so $heroic can detect that this is paginated data
-            'page'             => $page,
-			'data'			   => $posts
+			'paginatedData'    => $posts
 		]);
     }
 }

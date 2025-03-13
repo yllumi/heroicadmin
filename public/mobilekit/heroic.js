@@ -109,7 +109,7 @@ import Toastify from 'toastify-js';
             },
 
             // Raw data properties
-            rowData: {},
+            data: {},
 
             // PaginatedData data properties
             paginatedData: [],
@@ -126,16 +126,16 @@ import Toastify from 'toastify-js';
                 // Use cached data if exists
                 if($heroic.cached[this.config.url]) {
                     // Process for list-type data
-                    if($heroic.cached[this.config.url]?.list) {
-                        $heroic.cached[this.config.url].list.forEach(item => {
+                    if($heroic.cached[this.config.url]?.paginatedData) {
+                        $heroic.cached[this.config.url].paginatedData.forEach(item => {
                             this.paginatedData.push(item)
                         })
                         this.ui.nextPage = $heroic.cached[this.config.url].nextPage
-                        this.ui.loadMore = true
+                        this.ui.loadMore = $heroic.cached[this.config.url].loadMore
                     } 
                     // Process for row-type data
                     else {
-                        this.rowData = $heroic.cached[this.config.url].row
+                        this.data = $heroic.cached[this.config.url].data
                     }
                 } else {
                     this._fetchData();
@@ -148,17 +148,18 @@ import Toastify from 'toastify-js';
                 .then(response => {
                     if(response.response_code == 200) {
                         // Check if response data is a paginatedData
-                        if(response?.page) {
-                            this.ui.nextPage = response.page+1;
-                            response.data.forEach(item => {
+                        if(response?.paginatedData) {
+                            this.ui.nextPage = 2
+                            this.ui.loadMore = true
+                            response.paginatedData.forEach(item => {
                                 this.paginatedData.push(item)
                             })
                             // Save response data to cache
-                            let cached = {list: this.paginatedData, nextPage: this.ui.nextPage}
+                            let cached = {paginatedData: this.paginatedData, nextPage: this.ui.nextPage, loadMore: this.ui.loadMore}
                             $heroic.cached[this.config.url] = cached;
                         } else {
-                            this.rowData = response.data;
-                            let cached = {row: this.rowData}
+                            this.data = response.data;
+                            let cached = {data: this.data}
                             $heroic.cached[this.config.url] = cached;
                         }
 
@@ -186,19 +187,19 @@ import Toastify from 'toastify-js';
                 .then(response => {
                     if(response.response_code == 200) {
                         // Check if response data is a paginatedData
-                        if(response.data.length > 0) {
-                            this.ui.nextPage = response.page+1;
-                            response.data.forEach(item => {
+                        if(response.paginatedData.length > 0) {
+                            this.ui.nextPage += 1;
+                            response.paginatedData.forEach(item => {
                                 this.paginatedData.push(item)
                             })
-                            // Save response data to cache
-                            let cached = {list: this.paginatedData, nextPage: this.ui.nextPage}
-                            $heroic.cached[this.config.url] = cached;
                         } else {
                             this.ui.empty = true;
                             this.ui.nextPage = null;
                             this.ui.loadMore = false;
                         }
+                        // Save response data to cache
+                        let cached = {paginatedData: this.paginatedData, nextPage: this.ui.nextPage, loadMore: this.ui.loadMore}
+                        $heroic.cached[this.config.url] = cached;
                     } else {
                         this.ui.error = true;
                         this.ui.errorMessage = response.message;

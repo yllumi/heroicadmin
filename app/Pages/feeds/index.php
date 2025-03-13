@@ -36,7 +36,7 @@
 
             </ul>
 
-            <template x-if="ui.nextPage">
+            <template x-if="ui.loadMore">
                 <button class="btn btn-outline-secondary" @click="loadMore()">Load More</button>
             </template>
         </div>
