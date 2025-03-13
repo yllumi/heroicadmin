@@ -1,5 +1,5 @@
 document.addEventListener('alpine:init', () => {
-    Alpine.data('feeds', () => ({
+    Alpine.data('sample_mobile', () => ({
 
     }))
 }) 
