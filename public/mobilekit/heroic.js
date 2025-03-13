@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Toastify from 'toastify-js';
 
 (function(global) {
     global.$heroic = global.$heroic || {};
@@ -212,5 +213,4 @@ import axios from 'axios';
 
 })(window);
 
-// Expose axios to global scope
 window.axios = axios;

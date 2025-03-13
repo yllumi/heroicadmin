@@ -15,6 +15,22 @@ class PageController extends MobileBaseController
         return pageView('feeds/index', $data);
     }
 
+    public function getDetail()
+    {
+        $data['name'] = 'Detail Feed';
+        $Uri = service('uri');
+        $data['slug'] = $Uri->getSegment(2);
+
+        return pageView('feeds/detail', $data);
+    }
+
+    public function getContentDetail()
+    {
+        $data['name'] = 'Detail Feed';
+
+        return pageView('feeds/detail', $data);
+    }
+
     public function getSupply()
     {
         $data['feeds'] = [

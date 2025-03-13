@@ -1,5 +1,7 @@
 const path = require('path');
 const fs = require('fs');
+const webpack = require('webpack'); // 🔹 Tambahkan ini agar Webpack dikenali
+
 
 // Fungsi untuk mencari semua script.js di dalam folder Pages/
 function getAllScripts() {
@@ -24,7 +26,7 @@ function getAllScripts() {
 module.exports = {
   mode: 'development',
   entry: {
-    'heroic': './heroic.js', // Development pakai heroic.bundle.js
+    'heroic': './heroic.js', // Tanpa dependensi seperti Axios
     'pagescript': getAllScripts()
   },
   output: {

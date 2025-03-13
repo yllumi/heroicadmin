@@ -35,7 +35,6 @@
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/prompts-js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="<?= asset_url('mobilekit/assets/js/base.js') ?>"></script>
 
     <?php if (ENVIRONMENT === 'development'): ?>

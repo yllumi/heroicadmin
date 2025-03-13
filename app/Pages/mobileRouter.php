@@ -9,4 +9,9 @@
         x-route="/feeds" 
         x-template="['/feeds/content', '/_components/bottommenu']" 
         ></template>
+
+        <template 
+        x-route="/feeds/:slug" 
+        x-template="['/feeds/detail', '/_components/bottommenu']" 
+        ></template>
 </div>
