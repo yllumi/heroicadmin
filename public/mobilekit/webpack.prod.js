@@ -25,7 +25,7 @@ function getAllScripts() {
 module.exports = {
   mode: 'production',
   entry: {
-    'helpers.bundle.min': './helpers.js', // Production pakai helpers.bundle.min.js
+    'heroic.min': './heroic.js', // Production pakai heroic.bundle.min.js
     'pagescript.min': getAllScripts() // Production menghasilkan pagescript.min.js
   },
   output: {

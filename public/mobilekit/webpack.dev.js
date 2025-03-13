@@ -24,7 +24,7 @@ function getAllScripts() {
 module.exports = {
   mode: 'development',
   entry: {
-    'helpers.bundle': './helpers.js', // Development pakai helpers.bundle.js
+    'heroic': './heroic.js', // Development pakai heroic.bundle.js
     'pagescript': getAllScripts()
   },
   output: {

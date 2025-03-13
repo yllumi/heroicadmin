@@ -27,10 +27,10 @@ workbox.routing.registerRoute(
 // Daftarkan disini request static yang sangat jarang berubah
 // dan punya penampilan data dinamis yang sudah menggunakan ajax secara penuh
 // Ketika pun ada update, tinggal raise revision number
-workbox.precaching.precacheAndRoute([
-  {url: '/offline', revision: '3' },
-  {url: '/mobilekit/assets/img/icon/offline.png', revision: '2' },
-]);
+// workbox.precaching.precacheAndRoute([
+//   {url: '/offline', revision: '3' },
+//   {url: '/mobilekit/assets/img/icon/offline.png', revision: '2' },
+// ]);
 
 // Handle request yang ga ada cachenya dengan halaman offline mode
 workbox.routing.setCatchHandler(async ({event}) => {

@@ -1,5 +1,5 @@
 <div id="feeds" 
-     x-data="$heroic({ 
+     x-data="$heroic.pageData({ 
         title: 'Feeds',
         url:'/feeds/supply',
         perpage: 10,

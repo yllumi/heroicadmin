@@ -28,7 +28,6 @@
     
     <!-- Script Packages -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -40,10 +39,10 @@
     <script src="<?= asset_url('mobilekit/assets/js/base.js') ?>"></script>
 
     <?php if (ENVIRONMENT === 'development'): ?>
-    <script src="<?= asset_url('mobilekit/assets/js/helpers.bundle.dev.js') ?>"></script>
+    <script src="<?= asset_url('mobilekit/assets/js/heroic.dev.js') ?>"></script>
     <script src="<?= asset_url('mobilekit/assets/js/pagescript.dev.js') ?>" defer></script>
     <?php else: ?>
-    <script src="<?= asset_url('mobilekit/assets/js/helpers.bundle.min.js') ?>"></script>
+    <script src="<?= asset_url('mobilekit/assets/js/heroic.min.js') ?>"></script>
     <script src="<?= asset_url('mobilekit/assets/js/pagescript.min.js') ?>" defer></script>
     <?php endif; ?>
 
