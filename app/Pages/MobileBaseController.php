@@ -22,10 +22,21 @@ class MobileBaseController extends BaseController
         $this->data['version'] = "1.0.0";
     }
 
-	// This method handle GET request
+	// Render shell template
 	public function getIndex()
 	{
 		return pageView('mobileLayout', $this->data);
 	}
+
+	// Render inner template
+	public function get_content()
+    {
+		$Uri = service('uri');
+        $parentUriSegments = $Uri->getSegments();
+        array_pop($parentUriSegments);
+        $parentUri = implode($parentUriSegments);
+
+        return pageView($parentUri . '/index');
+    }
 
 }

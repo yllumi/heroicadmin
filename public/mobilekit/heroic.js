@@ -92,21 +92,27 @@ import Toastify from 'toastify-js';
         return {
             // Configuration properties
             config: {
+                title,
                 url,
                 perpage,
-                title
             },
 
             // UI properties
             ui: {
                 loading: false,
                 submitting: false,
+                empty: false,
+                nextPage: null,
+                loadMore: false,
                 error: false,
                 errorMessage: '',
             },
 
-            // Data properties
-            data: {},
+            // Raw data properties
+            rowData: {},
+
+            // PaginatedData data properties
+            paginatedData: [],
 
             // Model properties
             model: {},
@@ -117,32 +123,94 @@ import Toastify from 'toastify-js';
                 this._setTitle();
 
                 // Initialize the page
-                this._fetchData();
+                // Use cached data if exists
+                if($heroic.cached[this.config.url]) {
+                    // Process for list-type data
+                    if($heroic.cached[this.config.url]?.list) {
+                        $heroic.cached[this.config.url].list.forEach(item => {
+                            this.paginatedData.push(item)
+                        })
+                        this.ui.nextPage = $heroic.cached[this.config.url].nextPage
+                        this.ui.loadMore = true
+                    } 
+                    // Process for row-type data
+                    else {
+                        this.rowData = $heroic.cached[this.config.url].row
+                    }
+                } else {
+                    this._fetchData();
+                }
             },
 
             _fetchData() {
-                // Cek apakah data sudah ada di cache
-                this.data = $heroic.cached[this.config.url] ?? null;
-                if(this.data == null){
-                    this.ui.loading = true;
-                    $heroic.fetchData(this.config.url)
-                    .then(response => {
-                        if(response.status == 'success') {
-                            this.data = response.data;
-                            $heroic.cached[this.config.url] = response.data;
+                this.ui.loading = true;
+                $heroic.fetchData(this.config.url)
+                .then(response => {
+                    if(response.response_code == 200) {
+                        // Check if response data is a paginatedData
+                        if(response?.page) {
+                            this.ui.nextPage = response.page+1;
+                            response.data.forEach(item => {
+                                this.paginatedData.push(item)
+                            })
+                            // Save response data to cache
+                            let cached = {list: this.paginatedData, nextPage: this.ui.nextPage}
+                            $heroic.cached[this.config.url] = cached;
                         } else {
-                            this.ui.error = true;
-                            this.ui.errorMessage = response.message;
+                            this.rowData = response.data;
+                            let cached = {row: this.rowData}
+                            $heroic.cached[this.config.url] = cached;
                         }
-                    })
-                    .catch(error => {
+
+                    } else {
                         this.ui.error = true;
-                        console.error('Error fetching page data:', error);
-                    })
-                    .finally(() => {
-                        this.ui.loading = false;
-                    });
-                }
+                        this.ui.errorMessage = response.message;
+                    }
+                })
+                .catch(error => {
+                    this.ui.error = true;
+                    console.error('Error fetching page data:', error);
+                })
+                .finally(() => {
+                    this.ui.loading = false;
+                });
+            },
+
+            loadMore() {
+                this._fetchMoreData(this.ui.nextPage)
+            },
+
+            _fetchMoreData(page) {
+                this.ui.loading = true;
+                $heroic.fetchData(this.config.url + `?page=` + page)
+                .then(response => {
+                    if(response.response_code == 200) {
+                        // Check if response data is a paginatedData
+                        if(response.data.length > 0) {
+                            this.ui.nextPage = response.page+1;
+                            response.data.forEach(item => {
+                                this.paginatedData.push(item)
+                            })
+                            // Save response data to cache
+                            let cached = {list: this.paginatedData, nextPage: this.ui.nextPage}
+                            $heroic.cached[this.config.url] = cached;
+                        } else {
+                            this.ui.empty = true;
+                            this.ui.nextPage = null;
+                            this.ui.loadMore = false;
+                        }
+                    } else {
+                        this.ui.error = true;
+                        this.ui.errorMessage = response.message;
+                    }
+                })
+                .catch(error => {
+                    this.ui.error = true;
+                    console.error('Error fetching page data:', error);
+                })
+                .finally(() => {
+                    this.ui.loading = false;
+                });
             },
 
             _setTitle() {

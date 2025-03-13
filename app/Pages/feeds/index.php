@@ -1,5 +1,5 @@
-<div id="feeds" 
-     x-data="$heroic.pageData({ 
+<div id="feeds"
+    x-data="$heroic.pageData({ 
         title: 'Feeds',
         url:'/feeds/supply',
         perpage: 10,
@@ -15,8 +15,30 @@
 
     <!-- App Capsule -->
     <div id="appCapsule">
-        <div class="container mt-2">
-            <h2><?= $name ?></h2>
+        <div id="appData">
+            <ul class="listview image-listview media">
+
+                <template x-for="item in paginatedData">
+                    <li>
+                        <div class="item">
+                            <div class="imageWrapper">
+                                <img :src="item.medias[0].url" alt="image" class="imaged w64">
+                            </div>
+                            <div class="in">
+                                <div>
+                                    <span x-text="item.title"></span>
+                                    <div class="text-muted" x-text="$heroic.helper.formatDate(item.created_at)"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </template>
+
+            </ul>
+
+            <template x-if="ui.nextPage">
+                <button class="btn btn-outline-secondary" @click="loadMore()">Load More</button>
+            </template>
         </div>
     </div>
 
