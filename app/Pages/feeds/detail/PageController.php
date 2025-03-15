@@ -10,7 +10,7 @@ class PageController extends MobileBaseController
     protected $pageTitle    = "Feed Detail";
     protected $pageTemplate = 'feeds/detail/index';
 
-    public function getInit($id)
+    public function getData($id)
     {
         $data['id'] = $id;
 

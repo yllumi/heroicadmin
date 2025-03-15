@@ -2,7 +2,7 @@
     x-data="$heroic.page({ 
         title: 'Add New Feed',
         postUrl: '/feeds/add/insert',
-        clearCachePath: '/feeds',
+        clearCachePath: '/feeds/data',
         postRedirect: '/feeds',
      })">
 
@@ -28,7 +28,7 @@
                         <input type="text" class="form-control" name="nim" x-model="model.nim">
                     </div>
                     <hr>
-                    <button @click="postPageData()" class="btn btn-primary">Simpan</button>
+                    <button @click="submitData()" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>

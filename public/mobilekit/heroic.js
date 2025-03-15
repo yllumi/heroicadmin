@@ -230,13 +230,13 @@ import Toastify from 'toastify-js';
                 }
             },
 
-            postPageData() {
+            submitData() {
                 this.ui.submitting = true
                 $heroic.postData(this.config.postUrl, this.model)
                 .then(data => {
                     if(data.response_code == 200) {
                         if(this.config.postRedirect) {
-                            $heroic.cached[this.config.clearCachePath] = {}
+                            delete $heroic.cached[this.config.clearCachePath]
                             window.PineconeRouter.context.redirect(this.config.postRedirect)
                         } else {
                             this.model = {}

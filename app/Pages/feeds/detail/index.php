@@ -1,6 +1,6 @@
 <div id="feeds_detail" 
     x-data="$heroic.page({
-        getUrl:'/feeds/detail/init/' + $router.params.id,
+        getUrl:'/feeds/detail/data/' + $router.params.id,
     })">
 
     <div class="appHeader bg-brand">
