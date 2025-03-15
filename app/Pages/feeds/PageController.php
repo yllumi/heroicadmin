@@ -7,18 +7,10 @@ class PageController extends MobileBaseController
 {
     use ResponseTrait;
 
-    protected $pageTitle = "Feeds";
+    protected $pageTitle    = "Feeds";
+    protected $pageTemplate = 'feeds/index';
 
-    public function getDetail()
-    {
-        $data['name'] = 'Detail Feed';
-        $Uri = service('uri');
-        $data['slug'] = $Uri->getSegment(2);
-
-        return pageView('feeds/detail', $data);
-    }
-
-    public function getSupply()
+    public function getInit()
     {
         // Retrieve extension attributes
 		$page = (int)($this->request->getGet('page') ?? 1);

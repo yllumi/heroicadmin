@@ -4,9 +4,6 @@ use App\Pages\MobileBaseController;
 
 class PageController extends MobileBaseController 
 {
-    public function getContent()
-    {
-        $data = [];
-        return pageView('sample_mobile/index', $data);
-    }
+    protected $pageTitle    = "Feed Detail";
+    protected $pageTemplate = 'sample_mobile/index';
 }

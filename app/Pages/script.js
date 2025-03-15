@@ -4,7 +4,6 @@ document.addEventListener('alpine:init', () => {
 
     Alpine.data("router", () => ({
         async init(){
-            document.title = this.title;
             Alpine.store('core').sessionToken = localStorage.getItem('heroic_token')
             await Alpine.store('core').getSiteSettings()
         },

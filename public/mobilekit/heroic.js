@@ -86,7 +86,7 @@ import Toastify from 'toastify-js';
     global.$heroic.pageData = function({
         url = '', 
         perpage = 5,
-        title = '',
+        title = null,
         } = {}) {
 
         return {
@@ -178,10 +178,10 @@ import Toastify from 'toastify-js';
             },
 
             loadMore() {
-                this._fetchMoreData(this.ui.nextPage)
+                this._fetchPaginatedData(this.ui.nextPage)
             },
 
-            _fetchMoreData(page) {
+            _fetchPaginatedData(page) {
                 this.ui.loading = true;
                 $heroic.fetchData(this.config.url + `?page=` + page)
                 .then(response => {
@@ -215,7 +215,7 @@ import Toastify from 'toastify-js';
             },
 
             _setTitle() {
-                if(this.config.title != ''){
+                if(this.config.title){
                     document.title = this.config.title;
                 }
             }

@@ -1,7 +1,7 @@
 <div id="feeds"
     x-data="$heroic.pageData({ 
         title: 'Feeds',
-        url:'/feeds/supply',
+        url:'/feeds/init',
         perpage: 10,
      })">
 
@@ -20,7 +20,7 @@
 
                 <template x-for="item in paginatedData">
                     <li>
-                        <div class="item">
+                        <a class="item" :href="`/feeds/` + item.id">
                             <div class="imageWrapper">
                                 <img :src="item.medias[0].url" alt="image" class="imaged w64">
                             </div>
@@ -30,7 +30,7 @@
                                     <div class="text-muted" x-text="$heroic.helper.formatDate(item.created_at)"></div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </li>
                 </template>
 

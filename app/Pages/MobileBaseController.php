@@ -10,6 +10,7 @@ class MobileBaseController extends BaseController
 	public $data = [];
 
 	protected $pageTitle = 'Page Title';
+	protected $pageTemplate = '';
 
 	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -29,14 +30,9 @@ class MobileBaseController extends BaseController
 	}
 
 	// Render inner template
-	public function get_content()
+	public function getTemplate()
     {
-		$Uri = service('uri');
-        $parentUriSegments = $Uri->getSegments();
-        array_pop($parentUriSegments);
-        $parentUri = implode($parentUriSegments);
-
-        return pageView($parentUri . '/index');
+        return pageView(trim($this->pageTemplate,'/'));
     }
 
 }
