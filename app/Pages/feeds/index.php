@@ -1,34 +1,31 @@
 <div id="feeds"
-    x-data="$heroic.pageData({ 
+    x-data="$heroic.page({ 
         title: 'Feeds',
-        url:'/feeds/init',
+        getUrl: '/feeds/data',
         perpage: 10,
-     })">
+    })">
 
     <div class="appHeader bg-brand">
         <div class="left"></div>
         <div class="pageTitle text-white">
             Feeds
         </div>
-        <div class="right"></div>
+        <div class="right">
+            <a href="/feeds/add"><i class="bi bi-plus-circle text-white"></i></a>
+        </div>
     </div>
 
     <!-- App Capsule -->
     <div id="appCapsule">
         <div id="appData">
-            <ul class="listview image-listview media">
+            <ul class="listview">
 
                 <template x-for="item in paginatedData">
                     <li>
-                        <a class="item" :href="`/feeds/` + item.id">
-                            <div class="imageWrapper">
-                                <img :src="item.medias[0].url" alt="image" class="imaged w64">
-                            </div>
-                            <div class="in">
-                                <div>
-                                    <span x-text="item.title"></span>
-                                    <div class="text-muted" x-text="$heroic.helper.formatDate(item.created_at)"></div>
-                                </div>
+                        <a class="item" :href="`/feeds/detail/` + item.id">
+                            <div class="d-flex justify-content-between">
+                                    <span x-text="item.nama"></span>
+                                    <span class="text-muted" x-text="item.nim"></span>
                             </div>
                         </a>
                     </li>
@@ -37,9 +34,10 @@
             </ul>
 
             <template x-if="ui.loadMore">
-                <button class="btn btn-outline-secondary" @click="loadMore()">Load More</button>
+                <div class="text-center mt-2">
+                    <button class="btn btn-outline-secondary" @click="loadMore()">Load More</button>
+                </div>
             </template>
         </div>
     </div>
-
 </div>

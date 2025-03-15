@@ -13,7 +13,7 @@ import Toastify from 'toastify-js';
     /************************************************************************** 
      * Fetch Ajax Data
      **************************************************************************/
-    global.$heroic.fetchData = function(page, headers = {}){ 
+    global.$heroic.fetchData = async function(page, headers = {}){ 
         // Memastikan base_url diakhiri dengan '/'
         if (!base_url.endsWith('/')) {
             base_url += '/';
@@ -25,7 +25,7 @@ import Toastify from 'toastify-js';
         // Menentukan separator berdasarkan ada atau tidaknya '?'
         let separator = fullUrl.includes('?') ? '&' : '?';
     
-        return axios
+        return await axios
             .get(fullUrl, headers)
             .then(response => {
                 return response.data;
@@ -83,18 +83,24 @@ import Toastify from 'toastify-js';
      * Fungsi untuk transaksi data dasar yang dibutuhkan oleh halaman 
      * tanpa harus menulis kode yang sama berulang-ulang
      **************************************************************************/
-    global.$heroic.pageData = function({
-        url = '', 
-        perpage = 5,
+    global.$heroic.page = function({
+        getUrl = null, 
         title = null,
+        perpage = 5,
+        postUrl = null,
+        postRedirect = null,
+        clearCachePath = null
         } = {}) {
 
         return {
             // Configuration properties
             config: {
                 title,
-                url,
+                getUrl,
                 perpage,
+                postUrl,
+                postRedirect,
+                clearCachePath
             },
 
             // UI properties
@@ -122,29 +128,33 @@ import Toastify from 'toastify-js';
                 // Set the page title
                 this._setTitle();
 
-                // Initialize the page
-                // Use cached data if exists
-                if($heroic.cached[this.config.url]) {
-                    // Process for list-type data
-                    if($heroic.cached[this.config.url]?.paginatedData) {
-                        $heroic.cached[this.config.url].paginatedData.forEach(item => {
-                            this.paginatedData.push(item)
-                        })
-                        this.ui.nextPage = $heroic.cached[this.config.url].nextPage
-                        this.ui.loadMore = $heroic.cached[this.config.url].loadMore
-                    } 
-                    // Process for row-type data
-                    else {
-                        this.data = $heroic.cached[this.config.url].data
+                // Initialize page data if requested
+                if(this.config.getUrl) {
+                    // Use cached data if exists
+                    if($heroic.cached[this.config.getUrl]) {
+                        // Process for list-type data
+                        if($heroic.cached[this.config.getUrl]?.paginatedData) {
+                            $heroic.cached[this.config.getUrl].paginatedData.forEach(item => {
+                                this.paginatedData.push(item)
+                            })
+                            this.ui.nextPage = $heroic.cached[this.config.getUrl].nextPage
+                            this.ui.loadMore = $heroic.cached[this.config.getUrl].loadMore
+                        } 
+                        // Process for row-type data
+                        else {
+                            this.data = $heroic.cached[this.config.getUrl].data
+                        }
+                    } else {
+                        this._fetchPageData();
                     }
-                } else {
-                    this._fetchData();
                 }
+
+                window.scrollTo(0,0)
             },
 
-            _fetchData() {
+            _fetchPageData() {
                 this.ui.loading = true;
-                $heroic.fetchData(this.config.url)
+                $heroic.fetchData(this.config.getUrl)
                 .then(response => {
                     if(response.response_code == 200) {
                         // Check if response data is a paginatedData
@@ -156,11 +166,11 @@ import Toastify from 'toastify-js';
                             })
                             // Save response data to cache
                             let cached = {paginatedData: this.paginatedData, nextPage: this.ui.nextPage, loadMore: this.ui.loadMore}
-                            $heroic.cached[this.config.url] = cached;
+                            $heroic.cached[this.config.getUrl] = cached;
                         } else {
                             this.data = response.data;
                             let cached = {data: this.data}
-                            $heroic.cached[this.config.url] = cached;
+                            $heroic.cached[this.config.getUrl] = cached;
                         }
 
                     } else {
@@ -183,7 +193,7 @@ import Toastify from 'toastify-js';
 
             _fetchPaginatedData(page) {
                 this.ui.loading = true;
-                $heroic.fetchData(this.config.url + `?page=` + page)
+                $heroic.fetchData(this.config.getUrl + `?page=` + page)
                 .then(response => {
                     if(response.response_code == 200) {
                         // Check if response data is a paginatedData
@@ -199,7 +209,7 @@ import Toastify from 'toastify-js';
                         }
                         // Save response data to cache
                         let cached = {paginatedData: this.paginatedData, nextPage: this.ui.nextPage, loadMore: this.ui.loadMore}
-                        $heroic.cached[this.config.url] = cached;
+                        $heroic.cached[this.config.getUrl] = cached;
                     } else {
                         this.ui.error = true;
                         this.ui.errorMessage = response.message;
@@ -218,6 +228,24 @@ import Toastify from 'toastify-js';
                 if(this.config.title){
                     document.title = this.config.title;
                 }
+            },
+
+            postPageData() {
+                this.ui.submitting = true
+                $heroic.postData(this.config.postUrl, this.model)
+                .then(data => {
+                    if(data.response_code == 200) {
+                        if(this.config.postRedirect) {
+                            $heroic.cached[this.config.clearCachePath] = {}
+                            window.PineconeRouter.context.redirect(this.config.postRedirect)
+                        } else {
+                            this.model = {}
+                            $heroic.helper.toastr('Data saved', 'success', 'bottom');
+                        }
+                    } else {
+                        $heroic.helper.toastr('Data failed to save', 'danger', 'bottom');
+                    }
+                })
             }
         }
     }
