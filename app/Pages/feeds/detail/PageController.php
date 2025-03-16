@@ -14,27 +14,33 @@ class PageController extends MobileBaseController
     {
         $data['id'] = $id;
 
-        // Get post data
-		$query = "SELECT `mein_microblogs`.`id`, `medias`, `title`, `content`, 
-            `total_like`, `total_comment`, `author` as `author_id`, users.avatar,
-            `users`.`name` as `author_name`, `mein_microblogs`.`status` as `status`, 
-            `mein_microblogs`.`created_at` as `created_at`, 
-            `mein_microblogs`.`published_at` as `published_at`
-            FROM `mein_microblogs`
-            JOIN `users` ON `users`.`id`=`mein_microblogs`.`author`
-            WHERE `mein_microblogs`.`id` = :id:";
-
+        // Get mahasiswa data
+		$query = "SELECT * FROM `mahasiswa`
+            WHERE `id` = :id:";
 
         // Get database pesantren
         $db = \Config\Database::connect();
 
-        $data['post'] = $db->query($query, ['id' => $data['id']])->getRowArray();  
-        $data['post']['medias'] = json_decode($data['post']['medias'], true);
+        $data['mahasiswa'] = $db->query($query, ['id' => $data['id']])->getRowArray();
         
         return $this->respond([
 			'response_code'    => 200,
 			'response_message' => 'success',
 			'data'             => $data
 		]);
+    }
+
+    public function postDelete($id)
+    {
+        // Get database pesantren
+        $db = \Config\Database::connect();
+
+        // Delete mahasiswa data
+        $db->table('mahasiswa')->delete(['id' => $id]);
+
+        return $this->respondDeleted([
+            'response_code'    => 200,
+            'response_message' => 'Data deleted successfully'
+        ]);
     }
 }

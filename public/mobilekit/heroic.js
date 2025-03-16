@@ -123,6 +123,9 @@ import Toastify from 'toastify-js';
             // Model properties
             model: {},
 
+            // Model error messages
+            modelMessage: {},
+
             // Function to initialize the page
             init() {
                 // Set the page title
@@ -230,8 +233,14 @@ import Toastify from 'toastify-js';
                 }
             },
 
-            submitData() {
+            async submitData(params = {}) {
+                if(params?.confirm) {
+                    const confirmedBoolean = await Prompts.confirm(params.confirm);
+                    if (!confirmedBoolean) return;
+                }
+
                 this.ui.submitting = true
+                this.modelMessage = {}
                 $heroic.postData(this.config.postUrl, this.model)
                 .then(data => {
                     if(data.response_code == 200) {
@@ -243,9 +252,10 @@ import Toastify from 'toastify-js';
                             $heroic.helper.toastr('Data saved', 'success', 'bottom');
                         }
                     } else {
-                        $heroic.helper.toastr('Data failed to save', 'danger', 'bottom');
+                        this.modelMessage = data.model_messages
                     }
                 })
+            
             }
         }
     }

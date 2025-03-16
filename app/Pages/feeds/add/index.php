@@ -19,13 +19,15 @@
         <div class="card">
             <div class="card-body">
 
-                    <div class="form-group">
+                    <div class="mb-2">
                         <label for="title">Nama</label>
                         <input type="text" class="form-control" name="nama" x-model="model.nama">
+                        <small class="text-danger" x-show="modelMessage?.nama" x-text="modelMessage?.nama" x-transition></small>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-2">
                         <label for="title">NIM</label>
                         <input type="text" class="form-control" name="nim" x-model="model.nim">
+                        <small class="text-danger" x-show="modelMessage?.nim" x-text="modelMessage?.nim" x-transition></small>
                     </div>
                     <hr>
                     <button @click="submitData()" class="btn btn-primary">Simpan</button>

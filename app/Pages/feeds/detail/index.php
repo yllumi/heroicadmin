@@ -1,6 +1,9 @@
 <div id="feeds_detail" 
     x-data="$heroic.page({
         getUrl:'/feeds/detail/data/' + $router.params.id,
+        postUrl: '/feeds/detail/delete/' + $router.params.id,
+        clearCachePath: '/feeds/data',
+        postRedirect: '/feeds',
     })">
 
     <div class="appHeader bg-brand">
@@ -15,11 +18,12 @@
         <div x-show="ui.loading">Loading</div>
 
         <div x-show="!ui.loading">
-            <h2 x-text="data?.post?.title"></h2>
-            <div class="mb-2">
-                <img :src="data?.post?.medias[0]?.url" alt="cover" class="w-100">
-            </div>
-            <div x-html="data?.post?.content"></div>
+            <h2 x-text="data?.mahasiswa?.nama"></h2>
+            <div x-html="data?.mahasiswa?.nim"></div>
         </div>
+
+        <button class="btn btn-outline-danger btn-sm mt-2" @click="submitData({confirm: `Yakin akan menghapus data?`})">
+            <i class="bi bi-trash"></i> Hapus
+        </button>
     </div>
 </div>

@@ -18,15 +18,13 @@
     <!-- App Capsule -->
     <div id="appCapsule">
         <div id="appData">
-            <ul class="listview">
+            <ul class="listview link-listview">
 
                 <template x-for="item in paginatedData">
                     <li>
                         <a class="item" :href="`/feeds/detail/` + item.id">
-                            <div class="d-flex justify-content-between">
-                                    <span x-text="item.nama"></span>
-                                    <span class="text-muted" x-text="item.nim"></span>
-                            </div>
+                            <span x-text="item.nama"></span>
+                            <span class="text-muted" x-text="item.nim"></span>
                         </a>
                     </li>
                 </template>
