@@ -1,6 +1,6 @@
 <?php namespace App\Pages\admin\user;
 
-use App\Pages\admin\AdminBaseController;
+use App\Pages\AdminBaseController;
 
 class PageController extends AdminBaseController 
 {

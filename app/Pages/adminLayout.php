@@ -5,7 +5,7 @@
 
 <!-- Alpinejs Routers -->
 <div id="app" x-data="router()">
-    <?= $this->include('admin/router') ?>
+    <?= $this->include('adminRouter') ?>
 </div>
 
 <?php $this->endSection() ?>

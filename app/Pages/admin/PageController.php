@@ -1,5 +1,6 @@
 <?php namespace App\Pages\admin;
 
+use App\Pages\AdminBaseController;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;

@@ -1,6 +1,5 @@
-<?php namespace App\Pages\admin;
+<?php namespace App\Pages;
 
-use App\Pages\PageBaseController;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -25,7 +24,7 @@ class AdminBaseController extends PageBaseController
 
     public function getIndex()
     {
-        return pageView('admin/layout', $this->data);
+        return pageView('adminLayout', $this->data);
     }
 
 }

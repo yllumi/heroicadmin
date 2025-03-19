@@ -5,7 +5,7 @@
 
     <!-- Alpinejs Routers -->
     <div id="app" x-data="router()">
-        <?= $this->include('router') ?>
+        <?= $this->include('pageRouter') ?>
     </div>
 
 <?php $this->endSection() ?>
