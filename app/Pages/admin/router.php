@@ -5,8 +5,8 @@
         ></template>
 
         <template 
-        x-route="/admin/:slug" 
-        x-template="/admin/template" 
+        x-route="/admin/user" 
+        x-template="/admin/user/template" 
         ></template>
         
 <!-- Notfound -->

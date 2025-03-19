@@ -4,6 +4,5 @@ use App\Pages\PageBaseController;
 
 class PageController extends PageBaseController 
 {
-    protected $pageTitle    = "Feed Detail";
-    protected $pageTemplate = 'notfound/index';
+    protected $pageTitle    = "404 Page Not Found";
 }
