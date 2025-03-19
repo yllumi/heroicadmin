@@ -1,12 +1,8 @@
 <?php namespace App\Pages\home;
 
-use App\Controllers\BaseController;
+use App\Pages\PageBaseController;
 
-class PageController extends BaseController 
+class PageController extends PageBaseController 
 {
-    public function getIndex()
-    {
-        $data = [];
-        return pageView('home/index', $data);
-    }
+    protected $pageTitle    = "Feed Detail";
 }

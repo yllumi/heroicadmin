@@ -5,7 +5,7 @@
 
     <!-- Alpinejs Routers -->
     <div id="app" x-data="router()">
-        <?= $this->include('mobileRouter') ?>
+        <?= $this->include('router') ?>
     </div>
 
 <?php $this->endSection() ?>

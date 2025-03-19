@@ -5,12 +5,12 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-class MobileBaseController extends BaseController 
+class PageBaseController extends BaseController 
 {
 	public $data = [];
 
 	protected $pageTitle = 'Page Title';
-	protected $pageTemplate = '';
+	protected $pageTemplate;
 
 	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -20,19 +20,22 @@ class MobileBaseController extends BaseController
 		$this->data['page_title'] = $this->pageTitle;
 		$this->data['themeURL'] = base_url('mobilekit') .'/'; 
         $this->data['themePath'] = 'mobilekit/'; 
-        $this->data['version'] = "1.0.0";
     }
 
 	// Render shell template
 	public function getIndex()
 	{
-		return pageView('mobileLayout', $this->data);
+		return pageView('layout', $this->data);
 	}
 
 	// Render inner template
 	public function getTemplate()
     {
-        return pageView(trim($this->pageTemplate,'/'));
+		// Set $pageTemplate automatically based on folder path
+		$classPathDir = dirname((new \ReflectionClass(static::class))->getFileName());
+		$this->pageTemplate = str_replace(APPPATH .'Pages/', '', $classPathDir) . '/template';
+		
+        return pageView(trim($this->pageTemplate,'/'), $this->data);
     }
 
 }

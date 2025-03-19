@@ -6,8 +6,8 @@
         ></template>
     
     <template 
-        x-route="/sample_mobile" 
-        x-template="['/sample_mobile/template', '/_components/bottommenu']" 
+        x-route="/" 
+        x-template="['/home/template', '/_components/bottommenu']" 
         ></template>
    
     <template 

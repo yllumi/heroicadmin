@@ -1,5 +1,5 @@
 <div id="feeds_detail" 
-    x-data="$heroic.page({
+    x-data="$heroic({
         getUrl:'/feeds/detail/data/' + $router.params.id,
         postUrl: '/feeds/detail/delete/' + $router.params.id,
         clearCachePath: '/feeds/data',
@@ -7,7 +7,9 @@
     })">
 
     <div class="appHeader bg-brand">
-        <div class="left"></div>
+        <div class="left">
+            <a href="/feeds"><i class="bi bi-chevron-left text-white"></i></a>
+        </div>
         <div class="pageTitle text-white">
             Feed Detail
         </div>

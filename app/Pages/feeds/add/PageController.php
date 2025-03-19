@@ -2,15 +2,14 @@
 
 namespace App\Pages\feeds\add;
 
-use App\Pages\MobileBaseController;
+use App\Pages\PageBaseController;
 use CodeIgniter\API\ResponseTrait;
 
-class PageController extends MobileBaseController
+class PageController extends PageBaseController
 {
     use ResponseTrait;
 
     protected $pageTitle    = "Add new feed";
-    protected $pageTemplate = 'feeds/add/index';
 
     public function postInsert()
     {

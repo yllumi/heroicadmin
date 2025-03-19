@@ -1,14 +1,13 @@
 <?php namespace App\Pages\feeds\detail;
 
-use App\Pages\MobileBaseController;
+use App\Pages\PageBaseController;
 use CodeIgniter\API\ResponseTrait;
 
-class PageController extends MobileBaseController 
+class PageController extends PageBaseController 
 {
     use ResponseTrait;
 
     protected $pageTitle    = "Feed Detail";
-    protected $pageTemplate = 'feeds/detail/index';
 
     public function getData($id)
     {

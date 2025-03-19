@@ -9,13 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "../../app/Pages/sample_mobile/script.js":
-/*!***********************************************!*\
-  !*** ../../app/Pages/sample_mobile/script.js ***!
-  \***********************************************/
+/***/ "../../app/Pages/home/script.js":
+/*!**************************************!*\
+  !*** ../../app/Pages/home/script.js ***!
+  \**************************************/
 /***/ (() => {
 
-eval("document.addEventListener('alpine:init', function () {\n  Alpine.data('sample_mobile', function () {\n    return {};\n  });\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi4vLi4vYXBwL1BhZ2VzL3NhbXBsZV9tb2JpbGUvc2NyaXB0LmpzIiwibmFtZXMiOlsiZG9jdW1lbnQiLCJhZGRFdmVudExpc3RlbmVyIiwiQWxwaW5lIiwiZGF0YSJdLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4uLy4uL2FwcC9QYWdlcy9zYW1wbGVfbW9iaWxlL3NjcmlwdC5qcz8xM2VhIl0sInNvdXJjZXNDb250ZW50IjpbImRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2FscGluZTppbml0JywgKCkgPT4ge1xuICAgIEFscGluZS5kYXRhKCdzYW1wbGVfbW9iaWxlJywgKCkgPT4gKHtcblxuICAgIH0pKVxufSkgIl0sIm1hcHBpbmdzIjoiQUFBQUEsUUFBUSxDQUFDQyxnQkFBZ0IsQ0FBQyxhQUFhLEVBQUUsWUFBTTtFQUMzQ0MsTUFBTSxDQUFDQyxJQUFJLENBQUMsZUFBZSxFQUFFO0lBQUEsT0FBTyxDQUVwQyxDQUFDO0VBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDIiwiaWdub3JlTGlzdCI6W119\n//# sourceURL=webpack-internal:///../../app/Pages/sample_mobile/script.js\n");
+eval("document.addEventListener('alpine:init', function () {\n  Alpine.data('sample_mobile', function () {\n    return {};\n  });\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi4vLi4vYXBwL1BhZ2VzL2hvbWUvc2NyaXB0LmpzIiwibmFtZXMiOlsiZG9jdW1lbnQiLCJhZGRFdmVudExpc3RlbmVyIiwiQWxwaW5lIiwiZGF0YSJdLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4uLy4uL2FwcC9QYWdlcy9ob21lL3NjcmlwdC5qcz9mYzJmIl0sInNvdXJjZXNDb250ZW50IjpbImRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ2FscGluZTppbml0JywgKCkgPT4ge1xuICAgIEFscGluZS5kYXRhKCdzYW1wbGVfbW9iaWxlJywgKCkgPT4gKHtcblxuICAgIH0pKVxufSkgIl0sIm1hcHBpbmdzIjoiQUFBQUEsUUFBUSxDQUFDQyxnQkFBZ0IsQ0FBQyxhQUFhLEVBQUUsWUFBTTtFQUMzQ0MsTUFBTSxDQUFDQyxJQUFJLENBQUMsZUFBZSxFQUFFO0lBQUEsT0FBTyxDQUVwQyxDQUFDO0VBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDIiwiaWdub3JlTGlzdCI6W119\n//# sourceURL=webpack-internal:///../../app/Pages/home/script.js\n");
 
 /***/ }),
 
@@ -35,7 +35,7 @@ eval("function _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"func
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
-/******/ 	__webpack_modules__["../../app/Pages/sample_mobile/script.js"]();
+/******/ 	__webpack_modules__["../../app/Pages/home/script.js"]();
 /******/ 	var __webpack_exports__ = {};
 /******/ 	__webpack_modules__["../../app/Pages/script.js"]();
 /******/ 	
