@@ -13,7 +13,7 @@ $sidebar = [
             'list' => [
                 'label' => 'Users',
                 'icon' => 'bi bi-people',
-                'url' => '/admin/user',
+                'url' => '/admin/user/1',
             ],
             'role' => [
                 'label' => 'Roles',

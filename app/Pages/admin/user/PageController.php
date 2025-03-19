@@ -4,23 +4,31 @@ use App\Pages\AdminBaseController;
 
 class PageController extends AdminBaseController 
 {
-    public function getData()
+    public function getData($page = 1)
     {
-        $data = [
-            'page_title'      => 'Users',
-            'page_subtitle'   => 'User registered on this platform',
-            'breadcrumbs'     => [
-                'Dashboard' => '/admin',
-                'Users'     => '/admin/user',
-            ],
-            
-            'welcome_message' => 'Welcome to Heroic!'
-        ];
+        // Retrieve extension attributes
+		$perpage = (int)($this->request->getGet('perpage') ?? 2);
+		$offset = ($page-1) * $perpage;
 
-        return $this->respond([
+        // Get post data
+		$query = "SELECT *
+            FROM `mahasiswa`
+            ORDER BY created_at desc
+            LIMIT :offset:, :perpage:";
+
+        // Get database pesantren
+        $db = \Config\Database::connect();
+
+        $data['users'] = $db->query($query, [
+            'offset' => $offset,
+            'perpage' => $perpage
+        ])->getResultArray();
+
+		return $this->respond([
 			'response_code'    => 200,
 			'response_message' => 'success',
-			'data'             => $data
+			'paginatedData'    => $data['users'],
+            'page'             => $page
 		]);
     }
 }

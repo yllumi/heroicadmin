@@ -1,7 +1,9 @@
 <div class="page-heading" 
+    id="users"
     x-data="$heroic({
         title: `Users`,
-        getUrl: `/admin/user/data`
+        getUrl: `/admin/user/data/${$router.params.page || 1}`,
+        perpage: 2,
     })">
     <div class="page-title">
         <div class="row">
@@ -25,7 +27,16 @@
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <h1 x-text="data.welcome_message"></h1>
+                
+                <template x-for="user in paginatedData">
+                    <div>
+                        <h1 x-text="user?.nama"></h1>
+                    </div>
+                </template>
+
+                <div class="pagination">
+                    <a href="/admin/user/2">2</a>
+                </div>
             </div>
         </div>
         

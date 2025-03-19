@@ -13,7 +13,7 @@ class PageController extends BaseController {
 		$data['bottommenu'] = [
 			[
 				"label" => "Beranda",
-				"url" => "/sample_mobile",
+				"url" => "/",
 				"icon" => '<i class="bi bi-house"></i>'
 			],
 			[

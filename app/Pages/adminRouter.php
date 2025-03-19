@@ -5,7 +5,7 @@
         ></template>
 
         <template 
-        x-route="/admin/user" 
+        x-route="/admin/user/:page?" 
         x-template="/admin/user/template" 
         ></template>
         

@@ -1,9 +1,7 @@
-<div id="sample_mobile" x-data="sample_mobile()">
+<div id="home" x-data="home()">
     <div class="appHeader bg-brand">
         <div class="left"></div>
-        <div class="pageTitle text-white">
-            MobileApp
-        </div>
+        <div class="pageTitle text-white" x-text="name"></div>
         <div class="right"></div>
     </div>
 
@@ -33,3 +31,9 @@
     <!-- * App Capsule -->
 
 </div>
+
+<script>
+    Alpine.data('home', () => ({
+        name: 'Toni Haryanto'
+    }))
+</script>

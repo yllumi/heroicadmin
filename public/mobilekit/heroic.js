@@ -8,7 +8,7 @@ import Toastify from 'toastify-js';
     /************************************************************************** 
      * Deklarasi variable
     **************************************************************************/
-    let cached = {};
+    global.$heroicHelper.cached = {};
 
     /************************************************************************** 
      * Page Data
@@ -63,21 +63,25 @@ import Toastify from 'toastify-js';
                 // Set the page title
                 this._setTitle();
 
+                if(this.config.clearCachePath) {
+                    delete $heroicHelper.cached[this.config.clearCachePath]
+                }
+
                 // Initialize page data if requested
                 if(this.config.getUrl) {
-                    // Use cached data if exists
-                    if(cached[this.config.getUrl]) {
+                    // Use $heroicHelper.cached data if exists
+                    if($heroicHelper.cached[this.config.getUrl]) {
                         // Process for list-type data
-                        if(cached[this.config.getUrl]?.paginatedData) {
-                            cached[this.config.getUrl].paginatedData.forEach(item => {
+                        if($heroicHelper.cached[this.config.getUrl]?.paginatedData) {
+                            $heroicHelper.cached[this.config.getUrl].paginatedData.forEach(item => {
                                 this.paginatedData.push(item)
                             })
-                            this.ui.nextPage = cached[this.config.getUrl].nextPage
-                            this.ui.loadMore = cached[this.config.getUrl].loadMore
+                            this.ui.nextPage = $heroicHelper.cached[this.config.getUrl].nextPage
+                            this.ui.loadMore = $heroicHelper.cached[this.config.getUrl].loadMore
                         } 
                         // Process for row-type data
                         else {
-                            this.data = cached[this.config.getUrl].data
+                            this.data = $heroicHelper.cached[this.config.getUrl].data
                         }
                     } else {
                         this._fetchPageData();
@@ -101,11 +105,11 @@ import Toastify from 'toastify-js';
                             })
                             // Save response data to cache
                             let cached = {paginatedData: this.paginatedData, nextPage: this.ui.nextPage, loadMore: this.ui.loadMore}
-                            cached[this.config.getUrl] = cached;
+                            $heroicHelper.cached[this.config.getUrl] = cached;
                         } else {
                             this.data = response.data;
                             let cached = {data: this.data}
-                            cached[this.config.getUrl] = cached;
+                            $heroicHelper.cached[this.config.getUrl] = cached;
                         }
 
                     } else {
@@ -144,7 +148,7 @@ import Toastify from 'toastify-js';
                         }
                         // Save response data to cache
                         let cached = {paginatedData: this.paginatedData, nextPage: this.ui.nextPage, loadMore: this.ui.loadMore}
-                        cached[this.config.getUrl] = cached;
+                        $heroicHelper.cached[this.config.getUrl] = cached;
                     } else {
                         this.ui.error = true;
                         this.ui.errorMessage = response.message;
@@ -177,7 +181,7 @@ import Toastify from 'toastify-js';
                 .then(data => {
                     if(data.response_code == 200) {
                         if(this.config.postRedirect) {
-                            delete cached[this.config.clearCachePath]
+                            delete $heroicHelper.cached[this.config.clearCachePath]
                             window.PineconeRouter.context.redirect(this.config.postRedirect)
                         } else {
                             this.model = {}
