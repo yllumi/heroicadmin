@@ -35,6 +35,7 @@
                 </template>
 
                 <div class="pagination">
+                    <a href="/admin/user/1">1</a>
                     <a href="/admin/user/2">2</a>
                 </div>
             </div>

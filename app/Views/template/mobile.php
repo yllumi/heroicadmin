@@ -45,6 +45,7 @@
     <script src="<?= asset_url('mobilekit/assets/js/pagescript.min.js') ?>" defer></script>
     <?php endif; ?>
 
+    <script defer src="https://cdn.jsdelivr.net/npm/@imacrayon/alpine-ajax@0.12.0/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pinecone-router@6.x.x/dist/router.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
 

@@ -6,7 +6,7 @@
 
         <template 
         x-route="/admin/user/:page?" 
-        x-template="/admin/user/template" 
+        x-template.interpolate="/admin/user/template/:page" 
         ></template>
         
 <!-- Notfound -->

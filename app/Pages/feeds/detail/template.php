@@ -17,15 +17,31 @@
     </div>
 
     <div id="appCapsule" class="px-3 mt-2">
-        <div x-show="ui.loading">Loading</div>
 
-        <div x-show="!ui.loading">
-            <h2 x-text="data?.mahasiswa?.nama"></h2>
-            <div x-html="data?.mahasiswa?.nim"></div>
+        <div id="mahasiswa">
+            <div x-show="ui.loading">Loading</div>
+            
+            <div x-show="!ui.loading">
+                <h2 x-text="data?.mahasiswa?.nama"></h2>
+                <div x-html="data?.mahasiswa?.nim"></div>
+            </div>
+            
+            <button class="btn btn-outline-danger btn-sm mt-2" @click="submitData({confirm: `Yakin akan menghapus data?`})">
+                <i class="bi bi-trash"></i> Hapus
+            </button>
         </div>
-
-        <button class="btn btn-outline-danger btn-sm mt-2" @click="submitData({confirm: `Yakin akan menghapus data?`})">
-            <i class="bi bi-trash"></i> Hapus
-        </button>
+        
+        <ul class="listview link-listview mt-3">
+            
+            <template x-for="item in data.list">
+                <li>
+                    <a native x-target="mahasiswa" class="item" :href="`/feeds/detail/` + item.id">
+                        <span x-text="item.nama"></span>
+                        <span class="text-muted" x-text="item.nim"></span>
+                    </a>
+                </li>
+            </template>
+            
+        </ul>
     </div>
 </div>

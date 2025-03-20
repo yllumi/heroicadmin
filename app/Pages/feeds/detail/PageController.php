@@ -21,6 +21,13 @@ class PageController extends PageBaseController
         $db = \Config\Database::connect();
 
         $data['mahasiswa'] = $db->query($query, ['id' => $data['id']])->getRowArray();
+
+        // Get post data
+		$query2 = "SELECT *
+        FROM `mahasiswa`
+        ORDER BY created_at desc";
+
+        $data['list'] = $db->query($query2)->getResultArray();
         
         return $this->respond([
 			'response_code'    => 200,
