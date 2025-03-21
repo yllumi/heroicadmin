@@ -1,21 +1,31 @@
-<!-- Dashboard Admin -->
-<template 
-        x-route="/admin" 
-        x-template="/admin/template" 
-        ></template>
+<?php
 
-<template 
-        x-route="/admin/user/detail/:id" 
-        x-template.interpolate="/admin/user/detail/template/:id" 
-        ></template>
+$router = [
+    // [Admin Dashboard]
+    "/admin",
 
-<template 
-        x-route="/admin/user/:page?" 
-        x-template.interpolate="/admin/user/template/:page" 
-        ></template>
-        
-<!-- Notfound -->
-<template 
-    x-route="notfound" 
-    x-template="/notfound/template" 
-    ></template>
+    // [Admin User Detail]
+    "/admin/user/detail/:id" => [
+        'template' => '/admin/user/detail/template/:id',
+        'interpolate' => true,
+    ],
+
+    // [Admin User List with optional :page]
+    "/admin/user/:page?" => [
+        'template' => '/admin/user/template/:page',
+        'interpolate' => true,
+    ],
+
+    // [Not Found]
+    "notfound",
+];
+
+
+/**
+ * Render Router
+ * 
+ **/
+ 
+helper('heroic');
+echo ltrim(renderRouter($router));
+ 

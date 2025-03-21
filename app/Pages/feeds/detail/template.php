@@ -29,7 +29,7 @@
             
             <template x-for="item in data.list">
                 <li>
-                    <a class="item" :href="`/feeds/detail/` + item.id">
+                    <a native class="item" :href="`/feeds/detail/` + item.id">
                         <span x-text="item.nama"></span>
                         <span class="text-muted" x-text="item.nim"></span>
                     </a>

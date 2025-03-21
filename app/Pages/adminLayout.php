@@ -4,9 +4,9 @@
 <?php $this->section('main') ?>
 
 <!-- Alpinejs Routers -->
-<div id="app" x-data="router()">
-    <?= $this->include('adminRouter') ?>
-</div>
+<div id="app" x-data="router()"></div>
+
+<?= $this->include('adminRouter') ?>
 
 <?php $this->endSection() ?>
 <!-- END Content Section -->

@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="<?= asset_url('mobilekit/assets/css/custom.css') ?>">
 </head>
 
-<body class="<?= ENVIRONMENT === 'development' ? 'env-development' : '' ?>">
+<body class="<?= ENVIRONMENT === 'development' ? 'env-development' : '' ?>" id="body" x-data>
+
     <!-- Content Section -->
     <?= $this->renderSection('content') ?>
     

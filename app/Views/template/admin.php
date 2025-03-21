@@ -29,22 +29,20 @@
 
 <body>
     <script src="/admin/static/js/initTheme.js"></script>
-    <div id="app">
 
-        <?= $this->include('partials/admin_sidebar') ?>
+    <?= $this->include('partials/admin_sidebar') ?>
 
-        <!-- Content Section -->
-        <div id="main" class="layout-navbar navbar-fixed position-relative">
-            <?= $this->include('partials/admin_header') ?>
+    <!-- Content Section -->
+    <div id="main" class="layout-navbar navbar-fixed position-relative" x-data>
+        <?= $this->include('partials/admin_header') ?>
 
-            <div id="main-content">
-                <?= $this->renderSection('main') ?>
-            </div>
-
-            <?= $this->include('partials/admin_footer') ?>
+        <div id="main-content">
+            <?= $this->renderSection('main') ?>
         </div>
 
+        <?= $this->include('partials/admin_footer') ?>
     </div>
+
 
     <script src="/admin/static/js/components/dark.js"></script>
     <script src="/admin/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>

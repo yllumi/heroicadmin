@@ -1,27 +1,53 @@
-<div id="router" class="page-content">
-    <!-- Beranda -->
-    <template 
-        x-route="notfound" 
-        x-template="['/notfound/template', '/_components/bottommenu']" 
-        ></template>
-    
-    <template 
-        x-route="/" 
-        x-template="['/home/template', '/_components/bottommenu']" 
-        ></template>
-   
-    <template 
-        x-route="/feeds" 
-        x-template="['/feeds/template', '/_components/bottommenu']" 
-        ></template>
-    
-    <template 
-        x-route="/feeds/add" 
-        x-template.preload="['/feeds/add/template', '/_components/bottommenu']" 
-        ></template>
+<?php
 
-    <template 
-        x-route="/feeds/detail/:id" 
-        x-template="['/feeds/detail/template', '/_components/bottommenu']" 
-        ></template>
-</div>
+/** 
+ * Alpine Router list
+ * 
+ **/ 
+
+$router = [
+    // [Home]
+    "/" => [
+        'template' => [
+            '/home/template',
+            '/_components/bottommenu',
+        ],
+        'preload' => true,
+    ],
+
+    // [Not Found]
+    "notfound" => [
+        'preload' => true,
+    ],
+
+    // [Feeds List]
+    "/feeds" => [
+        'preload' => true,
+    ],
+
+    // [Add Feed]
+    "/feeds/add" => [
+        'template' => [
+            '/feeds/add/template',
+            '/_components/bottommenu',
+        ],
+    ],
+
+    // [Feed Detail]
+    "/feeds/detail/:id" => [
+        'template' => [
+            '/feeds/detail/template',
+            '/_components/bottommenu',
+        ],
+        // 'handler' => ['isLoggedIn', 'anotherHandler'],
+    ],
+];
+
+
+/**
+ * Render Router
+ * 
+ **/
+ 
+helper('heroic');
+echo ltrim(renderRouter($router));
