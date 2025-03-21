@@ -4,7 +4,12 @@
         x-template="/admin/template" 
         ></template>
 
-        <template 
+<template 
+        x-route="/admin/user/detail/:id" 
+        x-template.interpolate="/admin/user/detail/template/:id" 
+        ></template>
+
+<template 
         x-route="/admin/user/:page?" 
         x-template.interpolate="/admin/user/template/:page" 
         ></template>

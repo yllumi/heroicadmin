@@ -30,7 +30,9 @@
                 
                 <template x-for="user in paginatedData">
                     <div>
-                        <h1 x-text="user?.nama"></h1>
+                        <a :href="`/admin/user/detail/` + user?.id">
+                            <h1 x-text="user?.nama"></h1>
+                        </a>
                     </div>
                 </template>
 

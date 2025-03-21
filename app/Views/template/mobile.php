@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="<?= asset_url('mobilekit/assets/css/custom.css') ?>">
 </head>
 
-<body>
+<body class="<?= ENVIRONMENT === 'development' ? 'env-development' : '' ?>">
     <!-- Content Section -->
     <?= $this->renderSection('content') ?>
     
@@ -40,17 +40,20 @@
     <?php if (ENVIRONMENT === 'development'): ?>
     <script src="<?= asset_url('mobilekit/assets/js/heroic.dev.js') ?>"></script>
     <script src="<?= asset_url('mobilekit/assets/js/pagescript.dev.js') ?>" defer></script>
+    <script>
+        window.__ALPINE_STORE_NAMES_DEBUG__ = ['core'];
+    </script>
     <?php else: ?>
     <script src="<?= asset_url('mobilekit/assets/js/heroic.min.js') ?>"></script>
     <script src="<?= asset_url('mobilekit/assets/js/pagescript.min.js') ?>" defer></script>
     <?php endif; ?>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/@imacrayon/alpine-ajax@0.12.0/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pinecone-router@6.x.x/dist/router.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/pinecone-router@6.2.4/dist/router.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 	<script>
         Fancybox.bind('[data-fancybox="gallery"]', {});   
+
 		// Check that service workers are supported
 		if ('serviceWorker' in navigator) {
 			// Use the window load event to keep the page load performant

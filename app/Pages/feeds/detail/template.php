@@ -1,10 +1,4 @@
-<div id="feeds_detail" 
-    x-data="$heroic({
-        getUrl:'/feeds/detail/data/' + $router.params.id,
-        postUrl: '/feeds/detail/delete/' + $router.params.id,
-        clearCachePath: '/feeds/data',
-        postRedirect: '/feeds',
-    })">
+<div :id="`feed_detail_` + $router.params.id" x-data="feed_detail($router.params.id)" x-debug>
 
     <div class="appHeader bg-brand">
         <div class="left">
@@ -35,7 +29,7 @@
             
             <template x-for="item in data.list">
                 <li>
-                    <a native x-target="mahasiswa" class="item" :href="`/feeds/detail/` + item.id">
+                    <a class="item" :href="`/feeds/detail/` + item.id">
                         <span x-text="item.nama"></span>
                         <span class="text-muted" x-text="item.nim"></span>
                     </a>
@@ -45,3 +39,20 @@
         </ul>
     </div>
 </div>
+
+<script>
+    Alpine.data('feed_detail', (id) => ({
+        ui: {
+            loading: false
+        },
+        data: {},
+        init(){
+            this.ui.loading = true
+            axios.get(`/feeds/detail/data/` + id)
+            .then(response => {
+                this.data = response.data.data
+                this.ui.loading = false
+            })
+        }
+    }))
+</script>

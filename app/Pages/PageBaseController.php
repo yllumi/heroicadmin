@@ -29,7 +29,7 @@ class PageBaseController extends BaseController
 	}
 
 	// Render inner template
-	public function getTemplate()
+	public function getTemplate($params = null)
     {
 		// Set $pageTemplate automatically based on folder path
 		$classPathDir = dirname((new \ReflectionClass(static::class))->getFileName());
