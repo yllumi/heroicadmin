@@ -65,35 +65,3 @@ document.addEventListener('alpine:init', () => {
     })
 
 })
-
-// Deklarasi variable untuk menyimpan cache data page
-window.pageCache = {}; 
-
-//****************************************************************** */
-// Animated header style on scroll
-//****************************************************************** */
-window.animatedScroll = function() {
-    var appHeader = document.querySelector(".appHeader.scrolled");
-    var scrolled = window.scrollY;
-    if (scrolled > 20) {
-        appHeader.classList.add("is-active")
-    }
-    else {
-        appHeader.classList.remove("is-active")
-    }
-}
-
-// Variabel untuk melacak offcanvas yang sedang terbuka
-window.openOffcanvas = null;
-window.openModal = null;
-window.historyStateAdded = false;
-
-document.addEventListener('pinecone-end', () => {
-    var appHeader = document.querySelector(".appHeader.scrolled");
-    if (document.body.contains(appHeader)) {
-        animatedScroll();
-        document.addEventListener("scroll", function () {
-            animatedScroll()
-        })
-    }
-});

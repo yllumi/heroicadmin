@@ -36,35 +36,13 @@
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/prompts-js"></script>
-    <script src="<?= asset_url('mobilekit/assets/js/base.js') ?>"></script>
-
-    <?php if (ENVIRONMENT === 'development'): ?>
-    <script src="<?= asset_url('heroic/dist/heroic.dev.js') ?>"></script>
-    <script src="<?= asset_url('mobilekit/assets/js/pagescript.dev.js') ?>" defer></script>
-    <script>
-        window.__ALPINE_STORE_NAMES_DEBUG__ = ['core'];
-    </script>
-    <?php else: ?>
-    <script src="<?= asset_url('heroic/dist/heroic.min.js') ?>"></script>
-    <script src="<?= asset_url('mobilekit/assets/js/pagescript.min.js') ?>" defer></script>
-    <?php endif; ?>
-
+    <script src="<?= asset_url('mobilekit/assets/js/base.js') ?>"></script>    
+    <script src="<?= asset_url('heroic/dist/heroic.'. (ENVIRONMENT === 'development' ? 'dev' : 'min') .'.js') ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/pinecone-router@6.2.4/dist/router.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-	<script>
-        Fancybox.bind('[data-fancybox="gallery"]', {});   
-
-		// Check that service workers are supported
-		if ('serviceWorker' in navigator) {
-			// Use the window load event to keep the page load performant
-			window.addEventListener('load', () => {
-				navigator.serviceWorker.register(`/sw_masagi.js`);
-                window.console.log('Service-worker registered');
-			});
-		} else {
-			window.console.debug('Service-worker not supported');
-		}
-	</script>
+    
+    <!-- Content Section -->
+    <?= $this->renderSection('script') ?>
 </body>
 </html>

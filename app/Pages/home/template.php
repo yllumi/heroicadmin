@@ -8,7 +8,7 @@
     <!-- App Capsule -->
     <div id="appCapsule">
         <div class="bg-success-2 rounded-bottom-4">
-            <img class="d-none d-md-block" src="https://www.artsupplies.co.uk/blog/wp-content/uploads/2018/10/the-old-guitarist-picasso.jpg" alt="home_banner_large" style="width:100%">
+            <img class="d-none d-md-block" src="https://www.artsupplies.co.uk/blog/wp-content/uploads/2018/10/the-old-guitarist-picasso.jpg" alt="home_banner_large" style="width:100%; max-height: 550px; object-fit: cover; object-position: top;">
             <img class="d-block d-md-none" src="https://www.artsupplies.co.uk/blog/wp-content/uploads/2018/10/the-old-guitarist-picasso.jpg" alt="home_banner_mobile" style="width:100%">
         </div>
         <div class="header-large-title my-3" style="position: absolute;top: 55px;">

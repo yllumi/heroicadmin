@@ -3,8 +3,7 @@
 /** 
  * Alpine Router list
  * 
- **/ 
-
+ **/
 $router = [
     // [Home]
     "/" => [
@@ -23,6 +22,10 @@ $router = [
     // [Feeds List]
     "/feeds" => [
         'preload' => true,
+        'template' => [
+            '/feeds/template',
+            '/_components/bottommenu',
+        ],
     ],
 
     // [Add Feed]
@@ -48,6 +51,5 @@ $router = [
  * Render Router
  * 
  **/
- 
 helper('heroic');
 echo ltrim(renderRouter($router));
