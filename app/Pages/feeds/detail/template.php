@@ -1,4 +1,7 @@
-<div :id="`feed_detail_` + $router.params.id" x-data="feed_detail($router.params.id)" x-debug>
+<div :id="`feed_detail_` + $router.params.id" 
+    x-data="feed_detail($router.params.id)" 
+    x-effect="loadDetail($router.params.id)"
+    x-debug>
 
     <div class="appHeader bg-brand">
         <div class="left">
@@ -29,7 +32,7 @@
             
             <template x-for="item in data.list">
                 <li>
-                    <a native class="item" :href="`/feeds/detail/` + item.id">
+                    <a class="item" :href="`/feeds/detail/` + item.id">
                         <span x-text="item.nama"></span>
                         <span class="text-muted" x-text="item.nim"></span>
                     </a>
@@ -47,11 +50,16 @@
         },
         data: {},
         init(){
+            this.loadDetail()
+        },
+        loadDetail(id){
+            if(!id) return 
             this.ui.loading = true
             axios.get(`/feeds/detail/data/` + id)
             .then(response => {
                 this.data = response.data.data
                 this.ui.loading = false
+                NProgress.done()
             })
         }
     }))
