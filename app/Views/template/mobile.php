@@ -39,13 +39,13 @@
     <script src="<?= asset_url('mobilekit/assets/js/base.js') ?>"></script>
 
     <?php if (ENVIRONMENT === 'development'): ?>
-    <script src="<?= asset_url('mobilekit/assets/js/heroic.dev.js') ?>"></script>
+    <script src="<?= asset_url('heroic/dist/heroic.dev.js') ?>"></script>
     <script src="<?= asset_url('mobilekit/assets/js/pagescript.dev.js') ?>" defer></script>
     <script>
         window.__ALPINE_STORE_NAMES_DEBUG__ = ['core'];
     </script>
     <?php else: ?>
-    <script src="<?= asset_url('mobilekit/assets/js/heroic.min.js') ?>"></script>
+    <script src="<?= asset_url('heroic/dist/heroic.min.js') ?>"></script>
     <script src="<?= asset_url('mobilekit/assets/js/pagescript.min.js') ?>" defer></script>
     <?php endif; ?>
 
