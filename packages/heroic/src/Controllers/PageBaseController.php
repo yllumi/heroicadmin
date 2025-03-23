@@ -25,7 +25,7 @@ class PageBaseController extends BaseController
 	// Render shell template
 	public function getIndex()
 	{
-		return pageView('pageLayout', $this->data);
+		return pageView('layout', $this->data);
 	}
 
 	// Render inner template

@@ -44,9 +44,12 @@ $router = [
         ],
         // 'handler' => ['isLoggedIn', 'anotherHandler'],
     ],
+
+
+    "coba" => [ ],
+
+    "coba/lagi" => [ ],
 ];
-
-
 /**
  * Render Router
  * 

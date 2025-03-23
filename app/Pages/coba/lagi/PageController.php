@@ -13,7 +13,7 @@ class PageController extends PageBaseController
 
     public function getData()
     {
-        $this->data['name'] = "Mrs. Elody King";
+        $this->data['name'] = "Saige Dibbert";
 
         return $this->respond([
 			'response_code'    => 200,

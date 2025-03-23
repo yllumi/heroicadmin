@@ -72,6 +72,21 @@ class CreatePageCommand extends BaseCommand
                 '{{pageSlug}}' => str_replace('/', '_', $pagePath),
             ],
         );
+
+        // Add route
+        $routerFile = APPPATH . 'Pages/router.php';
+        $routerCode = file_get_contents($routerFile);
+
+        $pos = strpos($routerCode, '$router = [');
+        if ($pos === false) {
+            CLI::error('❌ Tidak menemukan variabel $router.');
+            return;
+        }
+        $newEntry = "\n    \"$pagePath\" => [ ]";
+        $updated = preg_replace('/\];\s/', "$newEntry,\n];", $routerCode, 1);
+
+        file_put_contents($routerFile, $updated);
+        CLI::write("✅ Route '$pagePath' berhasil ditambahkan ke router.php", 'green');
     }
 
     /**
