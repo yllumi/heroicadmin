@@ -24,11 +24,13 @@ function renderRouter($router = [], $minify = false)
             }
             $routerString .= "\" \n";
         } else {
-            if($routePath == '/') {
-                $routerString .= "/home/template\" \n";
-            } else {
-                $routerString .= "/" . trim($routePath, "/") . "/template\" \n";
+            $cleanedPath = preg_replace('/:([^\/]+)/', '', $routePath); // Hapus :param
+            $cleanedPath = rtrim($cleanedPath, '/'); // Hapus trailing slash
+            if($cleanedPath === '') {
+                $cleanedPath = '/home';
             }
+
+            $routerString .= $cleanedPath . "/template\" \n";
         }
         
         // Print handpler

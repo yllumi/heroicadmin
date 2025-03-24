@@ -37,7 +37,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/prompts-js"></script>
     <script src="<?= asset_url('mobilekit/assets/js/base.js') ?>"></script>    
-    <script src="<?= asset_url('heroic/dist/heroic.'. (ENVIRONMENT === 'development' ? 'dev' : 'min') .'.js') ?>"></script>
+    <script src="<?= asset_url('vendor/heroic/heroic.'. (ENVIRONMENT === 'development' ? 'dev' : 'min') .'.js') ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/pinecone-router@6.2.4/dist/router.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
