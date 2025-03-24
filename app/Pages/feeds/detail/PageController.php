@@ -1,6 +1,6 @@
 <?php namespace App\Pages\feeds\detail;
 
-use App\Pages\PageBaseController;
+use Yllumi\Heroic\Controllers\PageBaseController;
 use CodeIgniter\API\ResponseTrait;
 
 class PageController extends PageBaseController 

@@ -37,13 +37,7 @@ $router = [
     ],
 
     // [Feed Detail]
-    "/feeds/detail/:id" => [
-        'template' => [
-            '/feeds/detail/template',
-            '/_components/bottommenu',
-        ],
-        // 'handler' => ['isLoggedIn', 'anotherHandler'],
-    ],
+    "/feeds/detail/:id",
 
 
     "coba" => [ ],

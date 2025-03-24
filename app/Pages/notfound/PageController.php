@@ -1,6 +1,6 @@
 <?php namespace App\Pages\notfound;
 
-use App\Pages\PageBaseController;
+use Yllumi\Heroic\Controllers\PageBaseController;
 
 class PageController extends PageBaseController 
 {

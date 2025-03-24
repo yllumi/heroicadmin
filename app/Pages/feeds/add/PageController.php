@@ -2,7 +2,7 @@
 
 namespace App\Pages\feeds\add;
 
-use App\Pages\PageBaseController;
+use Yllumi\Heroic\Controllers\PageBaseController;
 use CodeIgniter\API\ResponseTrait;
 
 class PageController extends PageBaseController
